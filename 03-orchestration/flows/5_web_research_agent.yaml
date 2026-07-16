@@ -27,10 +27,9 @@ tasks:
     type: io.kestra.plugin.ai.agent.AIAgent
     description: Autonomous research agent with web search capabilities
     provider:
-      type: io.kestra.plugin.ai.provider.OpenAI
-      baseUrl: "https://api.groq.com/openai/v1"
-      modelName: "llama-3.3-70b-versatile"
-      apiKey: "{{ secret('GROQ_API_KEY') }}"
+      type: io.kestra.plugin.ai.provider.GoogleGemini
+      apiKey: "{{ secret('GEMINI_API_KEY') }}"
+      modelName: gemini-2.5-flash
     prompt: "{{ inputs.research_topic }}"
     systemMessage: |
       You are a thorough research assistant. Follow this process:
@@ -48,11 +47,6 @@ tasks:
       - Do not make up or hallucinate information
       - Include specific examples and data points when available
       - Always save the final report to research_report.md using the filesystem tool.
-    retry:
-      type: exponential
-      interval: PT2S
-      maxAttempt: 5
-      multiplier: 2.0
     contentRetrievers:
       - type: io.kestra.plugin.ai.retriever.TavilyWebSearch
         apiKey: "{{ secret('TAVILY_API_KEY') }}"

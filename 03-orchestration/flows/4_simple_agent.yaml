@@ -85,7 +85,6 @@ pluginDefaults:
   - type: io.kestra.plugin.ai.agent.AIAgent
     values:
       provider:
-        type: io.kestra.plugin.ai.provider.OpenAI
-        baseUrl: "https://api.groq.com/openai/v1"
-        modelName: "llama-3.3-70b-versatile"
-        apiKey: "{{ secret('GROQ_API_KEY') }}"
+        type: io.kestra.plugin.ai.provider.GoogleGemini
+        modelName: gemini-2.5-flash
+        apiKey: "{{ secret('GEMINI_API_KEY') }}"
